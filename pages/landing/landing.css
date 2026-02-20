@@ -19,6 +19,11 @@
     src: url('../../assets/fonts/Montserrat-SemiBold.ttf') format('ttf');
 } */
 
+:root {
+    --footer-bg: #20113D; /* Dark background from image */
+    --text-white: #FFFFFF;
+}
+
 *,
 *::before,
 *::after {
@@ -65,12 +70,9 @@ body {
     background: navy;
 }
 
-.header_nav {
-}
-
 .header-list {
     display: flex;
-    gap: 30px;
+    gap: 45px;
     list-style: none;
 }
 
@@ -136,19 +138,122 @@ body {
     transform: translateY(-50%);
 }
 
-.youtube { background-color: #ff0000; }
-.instagram { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
-.facebook { background-color: #3b5998; }
+.youtube { background-color: #FF0000; }
+.instagram { background: #C13584; }
+.facebook { background-color: #3B5998; }
 
 .social-icon:hover {
   transform: scale(1.1);
 }
 
-@media screen and (max-width: 900px) {
-
+.footer_logos a img {
+    display: block;
+    filter: brightness(0) invert(1);
+    height: 50px; 
 }
 
-@media screen and (max-width: 767px) {
+.school-logo img {
+    width: 138px;
+    height: auto;
+}
+
+.footer {
+    background-color: var(--footer-bg);
+    color: var(--text-white);
+    padding: 40px 0; /* padding */
+    font-family: 'Montserrat';
+}
+
+.footer_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 30px; /* padding */
+}
+
+.footer_logos {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.footer-list {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+}
+
+.footer-link {
+    color: var(--text-white);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
+.donate_btn {
+    border: 1px solid var(--text-white);
+    padding: 26px 45px;
+    color: var(--text-white);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    background-color: var(--footer-bg);
+}
+
+/* .donate_btn:last-child {
+    height: 22px;
+} */
+
+.footer_divider {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 1);
+    margin: 0 0 20px 0;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer_copyright {
+    display: flex;
+    gap: 50px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 150%;
+    opacity: 0.7;
+}
+
+.footer-social {
+    display: flex;
+    gap: 40px;
+}
+
+/* .social-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    color: var(--text-white);
+} */
+
+
+@media screen and (max-width: 900px) {
+    .footer_top {
+        flex-direction: column;
+        text-align: center;
+        gap: 50px;
+    }
+
+    .footer-bottom {
+        flex-direction: column-reverse;
+        gap: 50px;
+    }
+}
+
+@media screen and (max-width: 768px) {
     .header_burger {
         display: block;
         cursor: pointer;
@@ -241,8 +346,97 @@ body {
     }
 }
 
-@media screen and (max-width: 500px) {
-    .header_nav {
-        padding: 75px 35px;
+@media screen and (max-width: 640) {
+    .footer_container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    /* .footer {
+        padding: 40px 10px;
+        text-align: center;
+    } */
+
+    /* .footer_wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    } */
+        /* .footer_top {
+        flex-direction: column;
+        text-align: center;
+        gap: 50px;
+    } */
+
+    /* .footer_bottom {
+        flex-direction: column;
+        text-align: center;
+    } */
+
+    .footer_logos {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+    .footer-list {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px 25px;
+        margin-bottom: 35px;
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer-link {
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 16px;
+    }
+
+    .donate_btn {
+        display: block;
+        padding: 15px 30px;
+        font-weight: 500;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    .footer_divider {
+        width: 100%;
+        border: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        margin-bottom: 30px;
+    }
+
+    .footer-bottom {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .footer_copyright {
+        border-top: 1px solid rgba(255, 255, 255, 1);
+        display: flex;
+        /* flex-direction: column;
+        text-align: center; */
+        justify-content: space-between;
+        width: 100%;
+        font-size: 12px;
+        text-align: left;
+    }
+
+    .footer_copyright span {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .footer-social {
+        display: flex;
+        gap: 20px;
     }
 }
