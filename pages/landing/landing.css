@@ -92,6 +92,11 @@ body {
     opacity: .75;
 }
 
+.footer-link:hover, .footer-link:active, .footer-link:focus {
+    color: #00A092;
+    opacity: .75;
+}
+
 .header_social {
     display: flex;
     gap: 30px;
@@ -200,9 +205,8 @@ body {
     background-color: var(--footer-bg);
 }
 
-/* .donate_btn:last-child {
-    height: 22px;
-} */
+.donate_btn::after {
+}
 
 .footer_divider {
     border: none;
