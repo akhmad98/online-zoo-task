@@ -210,8 +210,12 @@ body {
     font-size: 20px;
 }
 
-.how-it-works {
+.section {
     padding: 100px 0;
+}
+
+.how-it-works {
+    /* padding: 100px 0; */
     background-color: #FFFFFF;
 }
 
@@ -340,6 +344,83 @@ body {
     font-size: 20px;
     cursor: pointer;
     transition: 0.3s;
+}
+
+.pay_and_feed {
+    color: rgba(255, 255, 255, 1);
+}
+
+.pay-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 260px;
+    background-color: rgba(32, 17, 61, 1);
+}
+
+.pay-step {
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+    padding-top: 110px;
+}
+
+.step-number {
+    font-family: 'Montserrat';
+    font-size: 26px;
+    font-weight: 500;
+    line-height: 130%;
+}
+
+.section-title {
+    font-family: 'Motserrat';
+    font-weight: 600;
+    font-size: 54px;
+    padding-top: 90px;
+    text-transform: uppercase;
+}
+
+.step-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 160px;
+}
+
+.step-image {
+    flex: 1;
+}
+
+.step-text h3 {
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 130%;
+}
+
+.step-text p {
+    font-family: 'Montserrat';
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 150%;
+}
+
+.step-image img {
+    width: 100%;
+    height: auto;
+    /* display: block; */
+    border-radius: 5px;
+}
+
+.step-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 30px;
+    flex: 1;
+}
+
+.step-text img {
+    max-width: 100px;
 }
 
 .footer_logos a img {
