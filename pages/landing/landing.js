@@ -6,6 +6,7 @@
 
     console.log(burgerTab)
     burgerTab.addEventListener('click', () => {
+        console.log('a')
         menu.classList.add('header_nav-active');
     });
     closeButton.addEventListener('click', () => {
