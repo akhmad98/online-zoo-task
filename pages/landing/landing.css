@@ -423,6 +423,161 @@ body {
     max-width: 100px;
 }
 
+.feedback-section-title {
+    padding: 0 160px 50px 0;
+}
+
+.user_feedback {
+    background-image: linear-gradient(rgba(32, 17, 61, 1), rgba(32, 17, 61, 0)), url("../../assets/images/feedbacke-image.png");
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    color: rgba(255, 255, 255, 1);
+}
+
+.feed_container {
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    gap: 30px;
+    padding: 100px 0 100px 260px;
+}
+
+.feed-info {
+    flex: 1;
+    min-width: 560px;
+}
+
+.section-info {
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 130%;
+}
+
+.feed-btn {
+    display: inline-block;
+    padding: 26px 45px;
+    border: 1px solid white;
+    color: var(--text-white);
+    text-decoration: none;
+    text-transform: uppercase;
+    border-radius: 5px;
+    margin-top: 1140px;
+    width: 359px;
+    height: 74px;
+    text-align: center;
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 100%;
+    text-transform: uppercase;
+}
+
+.feed-btn:hover {
+    background: white;
+    color: #000;
+}
+
+.feed-grid {
+    flex: 2;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.feed-card {
+    max-width: 515px;
+    background: #fff;
+    color: #333;
+    padding: 20px 50px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 20px;
+}
+
+.feed-btn::after {
+    content: "Leave feedback →";
+}
+
+.quote {
+    font-size: 120px;
+    font-weight: 800;
+    font-family: 'Montserrat';
+    letter-spacing: 1%;
+    line-height: 100%;
+    align-items: center;
+    text-transform: uppercase;
+    color: rgba(0, 160, 146, 1);
+}
+
+.feed-text {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 150%;
+    flex-grow: 1;
+    /* height: auto; */
+    color: rgba(0, 0, 0, 1);
+}
+
+.location-date {
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 130%;
+    color: rgba(0, 0, 0, 1);
+}
+
+.user-name {
+    font-family: 'Montserrat';
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 100%;
+    text-transform: uppercase;
+    padding: 0 0 60px 0;
+}
+
+.feed-controls {
+    display: flex;
+    gap: 120px;
+    margin-top: 50px;
+    justify-content: flex-start;
+}
+
+.control-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+    padding: 26px 45px;
+    background: transparent;
+    border: 1px solid var(--text-white);
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
+}
+
+.control-btn:before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+    display: block;
+}
+
+.prev::before {
+    transform: rotate(-180deg);
+    margin-left: 4px;
+}
+
+.next::before {
+    transform: rotate(45deg);
+    margin-right: 4px;
+}
+
 .donate-now-btn {
     width: 240px;
     padding: 26px 45px;
@@ -638,6 +793,29 @@ body {
 
     .step-image img {
         width: 550px;
+    }
+
+    .feed_container {
+        max-width: 1200px;
+        padding: 100px 0 100px 40px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .feed-info {
+        width: 45%;
+    }
+
+    .feed-grid {
+        padding-left: 140px;
+    }
+
+    .feed-controls {
+        justify-content: flex-end;
+    }
+
+    .feed-btn {
+        display: none;
     }
 }
 
