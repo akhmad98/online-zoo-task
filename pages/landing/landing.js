@@ -93,7 +93,7 @@ const openBtnB = document.querySelector('.donate-now');
 const modalContainer = document.getElementById('modalContainer'); // Пустой div для модалки
 
 openBtn.onclick = async () => {
-    const response = await fetch('/pages/modals/popup.html');
+    const response = await fetch('../modals/popup.html');
     const html = await response.text();
     
     modalContainer.innerHTML = html;
