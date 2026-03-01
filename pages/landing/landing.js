@@ -85,3 +85,23 @@ function updateActiveDot(actIndx) {
         }
     })
 }
+
+const openBtn = document.querySelector('.donate_btn');
+const openBtnA = document.querySelector('.donate-now-btn');
+const openBtnB = document.querySelector('.donate-now');
+
+const modalContainer = document.getElementById('modalContainer'); // Пустой div для модалки
+
+openBtn.onclick = async () => {
+    const response = await fetch('/pages/modals/popup.html');
+    const html = await response.text();
+    
+    modalContainer.innerHTML = html;
+
+    const completeBtn = document.getElementById('completeBtn');
+    if (completeBtn) {
+        completeBtn.onclick = () => {
+            modalContainer.innerHTML = '';
+        };
+    }
+};

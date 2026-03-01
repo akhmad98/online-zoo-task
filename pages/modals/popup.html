@@ -1,57 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./donation-popup.css">
-</head>
-<body>
+
+<link rel="stylesheet" href="/pages//modals/donation-popup.css">
+<div class="wrappp"></div>
     <div id="donationPopup" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>MAKE YOUR DONATION</h3>
-                <span class="close">&times;</span>
+                <h3>make your donation</h3>
+                <!-- <span class="close">&times;</span> -->
             </div>
-            
-            <div class="modal-body">
+            <div class="title" id="title">
                 <p class="section-title">Donation Information:</p>
-                <p class="label">* Choose your donation amount:</p>
-                
-                <div class="amount-grid">
-                    <button class="amt-btn">$10</button>
-                    <button class="amt-btn">$20</button>
-                    <button class="amt-btn">$30</button>
-                    <button class="amt-btn">$50</button>
-                    <button class="amt-btn">$80</button>
-                    <button class="amt-btn">$100</button>
+            </div>
+            <hr>
+            <div class="modal-body">
+                <div class="modal-body-card-detail" id="step_2">
+                    <div class="card-detail">
+                        <div class="card-number">
+                            <p class="label">* Credit Card Number:</p>
+                            <input name="creditCardNumber" id="creditCardNumber" type="number" autocomplete="4444 4444 4444 4444" />
+
+                            <p class="label">* CCV Number:</p>
+                            <input name="ccvNumber" id="ccvNumber" type="number" autocomplete="***" />
+                        </div>
+                        <p class="label">* Expiration Date:</p>
+                        <div class="placeholder">
+                            <select id="exp-year" name="year">
+                                <option value="" disabled selected>Year</option>
+                                <option value="2024">2024</option>
+                            </select>
+                            <select id="exp-month" name="month">
+                                <option value="" disabled selected>Month</option>
+                                <option value="12">12</option>
+                                <option value="11"></option>
+                                <option value="10"></option>
+                                <option value="09"></option>
+                                <option value="08"></option>
+                                <option value="07"></option>
+                                <option value="06"></option>
+                                <option value="05"></option>
+                                <option value="04"></option>
+                                <option value="03"></option>
+                                <option value="02"></option>
+                                <option value="01"></option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="other-amount">
-                    <button class="other-btn">OTHER AMOUNT</button>
-                    <input type="text" class="other-input">
+                <div class="modal-body-billing" id="step_1">
+                    <div class="billing">
+                        <div class="first-name">
+                            <p class="label">* First Name:</p>
+                            <input name="firstName" id="firstName" type="text" autocomplete="given-name" />
+                        </div>
+                        <div class="second-name">
+                            <p class="label">* Second Name:</p>
+                            <input name="secondName" id="secondName" type="text" autocomplete="given-name" />
+                        </div>
+                        <p>You will receive emails from the Online Zoo, including updates and news on the latest discoveries and translations. You can unsubscribe at any time.</p>
+                    </div>
                 </div>
+                <div class="modal-body-inner" id="step_0">
+                    <p class="label">* Choose your donation amount:</p>
+                    
+                    <div class="amount-grid">
+                        <button class="amt-btn" data-amount="10">$10</button>
+                        <button class="amt-btn" data-amount="20">$20</button>
+                        <button class="amt-btn" data-amount="30">$30</button>
+                        <button class="amt-btn" data-amount="50">$50</button>
+                        <button class="amt-btn" data-amount="80">$80</button>
+                        <button class="amt-btn" data-amount="100">$100</button>
+                    </div>
 
-                <div class="special-pet">
-                    <button class="pet-btn">FOR SPECIAL PET</button>
-                    <select class="pet-select">
-                        <option>Choose your favourite</option>
-                    </select>
+                    <div class="other-amount">
+                        <button class="other-btn actives">OTHER AMOUNT</button>
+                        <input type="number" class="other-input" id="other-input" />
+                    </div>
+
+                    <div class="special-pet">
+                        <button class="pet-btn">FOR SPECIAL PET</button>
+                        <select class="pet-select" id="pet-select">
+                            <option value="Lukas the Panda">Choose your favourite</option>
+                            <option value="Lukas the Panda">Lukas the Panda</option>
+                            <option value="Andy the Lemur">Andy the Lemur</option>
+                            <option value="Glen the Gorilla">Glen the Gorilla</option>
+                            <option value="Mike the Alligator">Mike the Alligator</option>
+                            <option value="Sam & Lora the eagles family">Sam & Lora the eagles family</option>
+                            <option value="Liz the Koala">Liz the Koala</option>
+                            <option value="Shake the Lion">Shake the Lion</option>
+                            <option value="Senja the Tiger">Senja the Tiger</option>
+                        </select>
+                    </div>
+
+                    <label class="recurring">
+                        <input type="checkbox" class="monthly-donate"> Make this a monthly recurring gift
+                    </label>
                 </div>
-
-                <label class="recurring">
-                    <input type="checkbox"> Make this a monthly recurring gift
-                </label>
-
                 <div class="modal-footer">
                     <div class="dots">
                         <span class="dot active"></span>
                         <span class="dot"></span>
                         <span class="dot"></span>
                     </div>
+                    <button class="prev-btn">BACK</button>
                     <button class="next-btn">NEXT &rarr;</button>
                 </div>
+                <button class="complete-btn">Complete</button>
             </div>
         </div>
     </div>
-</body>
-</html>
+<script src="/pages/modals/donation-popup.js"></script>
