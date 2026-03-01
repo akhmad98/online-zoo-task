@@ -581,19 +581,21 @@ body, html {
     margin: 0 auto;
     display: grid;
     gap: 30px;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 560px 1fr;
     grid-template-rows: auto auto;
     column-gap: 60px;
-    padding: 100px 0 100px 260px;
+    padding: 100px 0 100px 13.5%;
+    align-items: center;
+    overflow: hidden;
 }
 
 .feed-info {
     grid-column: 1;
-    grid-row: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    min-width: 560px;
+    gap: 30px;
+    height: 100%;
 }
 
 .section-info {
@@ -608,17 +610,16 @@ body, html {
 }
 
 .feed-grid {
-    grid-column: 2;
-    grid-row: 1;
     display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 30px;
+    grid-template-rows: repeat(2, auto);
+    grid-auto-flow: column; 
+    grid-auto-columns: calc(50% - 15px);
+    transition: transform 0.5s ease-in-out;
 }
 
 .feed-card {
-    background: #fff;
-    padding: 30px;
-    max-width: 515px;
+    min-height: 460px;
     background: #fff;
     color: #333;
     padding: 20px 50px;
@@ -670,18 +671,15 @@ body, html {
 }
 
 .feed-controls {
-    grid-column: 2;
-    grid-row: 2;
     display: flex;
     justify-content: flex-start;
     gap: 20px;
+    height: 100%;
     margin-top: 50px;
 }
 
 .feed-btn {
-    grid-column: 1;
-    grid-row: 3;
-    display: inline-block;
+    display: flex;
     padding: 26px 45px;
     border: 1px solid white;
     color: var(--text-white);
@@ -696,6 +694,7 @@ body, html {
     font-size: 18px;
     line-height: 100%;
     text-transform: uppercase;
+    margin-top: 400px;
 }
 
 .control-btn {
@@ -1105,10 +1104,12 @@ body, html {
         padding: 100px 0 100px 40px;
         display: flex;
         flex-direction: column;
+        /* align-items: flex-end; */
     }
 
     .feed-info {
         width: 45%;
+        margin-right: auto;
     }
 
     .feed-grid {
@@ -1116,7 +1117,19 @@ body, html {
     }
 
     .feed-controls {
+        margin-left: auto;
+    }
+
+    .feed-btn {
+        margin-right: auto;
+        margin-top: 100px;
+        order: 2;
+    }
+
+    .feed-controls {
+        align-items: right;
         justify-content: flex-end;
+        order: 1;
     }
 
     .care_container {
@@ -1711,29 +1724,31 @@ body, html {
     }
 
     .feed_container {
-        display: flex;
-        flex-direction: column;
+        grid-template-columns: 520px 1fr;
+        grid-template-rows: auto auto;
         width: 100%;
         padding: 0 20px;
-        align-items: right;
     }
 
     .feedback-section-title {
         text-align: left;
         padding-left: 0;
         padding-right: 180px;
+        justify-content: left;
     }
 
     .feed-info {
         width: 100%;
+        display: flex;
         text-align: left;
+        align-items: flex-start;
         margin-bottom: 40px;
     }
 
     .feed-grid {
         display: flex;
         overflow-x: auto;
-        width: 100vw;
+        width: 100%;
         gap: 20px;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
@@ -1742,9 +1757,8 @@ body, html {
     }
 
     .feed-card {
-        min-width: 85%;
+        width: 520px;
         display: flex;
-        
         scroll-snap-align: center;
         flex-shrink: 0;
     }
