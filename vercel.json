@@ -1,6 +1,7 @@
 {
-  "cleanUrls": true,
+  "public": true,
   "rewrites": [
-    { "source": "/", "destination": "/pages/lading/index.html" }
+    { "source": "/", "destination": "/pages/lading/index.html" },
+    { "source": "/images/(.*)", "destination": "/assets/images/$1" }
   ]
 }
