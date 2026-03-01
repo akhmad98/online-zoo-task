@@ -21,6 +21,8 @@ const nextFeedbtn = document.querySelector('.next');
 const prevFeedbtn = document.querySelector('.prev');
 const nextMeetbtn = document.querySelector('.next-btn');
 const prevMeetBtn = document.querySelector('.prev-btn');
+const animalGridLayout = document.querySelector('.animal-grid');
+const dots = document.querySelectorAll('.dot');
 
 nextMeetbtn.addEventListener('click', () => {
     const cardWidth = document.querySelector('.meet-animal-card').offsetWidth;
@@ -55,3 +57,31 @@ prevFeedbtn.addEventListener('click', () => {
         feedGridLayout.style.transform = `translateX(${scrollPosition}px)`
     }
 })
+
+dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+        const cardWidth = document.querySelector('.animal-card').offsetWidth;
+        const gap = 30;
+        const scrollAmnt = index * (cardWidth + gap);
+
+        animalGridLayout.scrollTo({
+            left: scrollAmnt,
+            behavior: 'smooth'
+        });
+
+        updateActiveDot(index);
+    })
+})
+
+
+
+
+function updateActiveDot(actIndx) {
+    dots.forEach((dot, i) => {
+        if (i === actIndx) {
+            dot.classList.add('active');
+        } else {
+            dot.classList.remove('active');
+        }
+    })
+}
