@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./donation-popup.css">
+</head>
+<body>
+    <div id="donationPopup" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>MAKE YOUR DONATION</h3>
+                <span class="close">&times;</span>
+            </div>
+            
+            <div class="modal-body">
+                <p class="section-title">Donation Information:</p>
+                <p class="label">* Choose your donation amount:</p>
+                
+                <div class="amount-grid">
+                    <button class="amt-btn">$10</button>
+                    <button class="amt-btn">$20</button>
+                    <button class="amt-btn">$30</button>
+                    <button class="amt-btn">$50</button>
+                    <button class="amt-btn">$80</button>
+                    <button class="amt-btn">$100</button>
+                </div>
+
+                <div class="other-amount">
+                    <button class="other-btn">OTHER AMOUNT</button>
+                    <input type="text" class="other-input">
+                </div>
+
+                <div class="special-pet">
+                    <button class="pet-btn">FOR SPECIAL PET</button>
+                    <select class="pet-select">
+                        <option>Choose your favourite</option>
+                    </select>
+                </div>
+
+                <label class="recurring">
+                    <input type="checkbox"> Make this a monthly recurring gift
+                </label>
+
+                <div class="modal-footer">
+                    <div class="dots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                    <button class="next-btn">NEXT &rarr;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
