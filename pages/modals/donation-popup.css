@@ -1,5 +1,5 @@
 .modal {
-    display: flex; /* Скрыто по умолчанию */
+    display: flex;
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0,0,0,0.5);
@@ -17,7 +17,7 @@
 }
 
 .modal-header {
-    background: #FE9013; /* Оранжевый из Figma */
+    background: #FE9013;
     color: white;
     padding: 30px;
     text-align: center;
@@ -43,7 +43,7 @@
 }
 
 .amt-btn, .other-btn, .pet-btn, .next-btn {
-    background: #00A092; /* Бирюзовый */
+    background: #00A092;
     color: white;
     border: none;
     padding: 15px;
