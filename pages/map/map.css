@@ -1,0 +1,159 @@
+main {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+}
+
+.map_header {
+    margin: 40px 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.map_title {
+    font-weight: 600;
+    font-size: 54px;
+    line-height: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Montserrat';
+    color: rgba(32, 17, 61, 1);
+}
+
+.map_section {
+    margin-top: 20px;
+    margin-bottom: 150px;
+    width: 100%;
+}
+
+.map_container {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.world_map {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.pin_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.map_pin {
+    position: absolute;
+    width: 100px;
+    height: 144px;
+    background-color: #F58021;
+    border-radius: 50%;
+    clip-path: polygon(50% 100%, 100% 40%, 100% 0%, 0% 0%, 0% 40%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    z-index: 2;
+    box-shadow: 0px 4px 30px 0px rgba(245, 128, 33, 0.7);
+}
+
+.map_pin:hover {
+    background-color: white;
+    filter: drop-shadow(0px 4px 30px rgba(0, 0, 0, 0.25));
+    box-shadow: 0px 4px 30px 0px rgba(255, 255, 255, 0.5);
+}
+.active_an {
+    border: 3px solid rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 1);
+    filter: drop-shadow(0px 4px 30px rgba(0, 0, 0, 0.25));
+    transition: filter 0.3s ease;
+    box-shadow: 0px 4px 30px 0px rgba(255, 255, 255, 0.5);
+}
+
+.pin_icon img {
+    height: auto;
+    width: 57px;
+    height: 46px;
+    margin-bottom: 20px;
+}
+
+.pin_icon {
+    font-size: 20px;
+    margin-top: -10px;
+}
+
+.pin_eagle {
+    top: 45%;
+    left: 12%;
+}
+
+.pin_croco {
+    top: 44%;
+    left: 21%;
+}
+
+.pin_lion {
+    top: 48%;
+    left: 40%;
+}
+
+.pin_gorilla {
+    top: 51%;
+    left: 50%;
+}
+
+.pin_lemur {
+    top: 64%;
+    left: 56%;
+}
+
+.pin_panda {
+    top: 36%;
+    left: 67%;
+}
+
+.pin_coala {
+    top: 67%;
+    left: 82%;
+}
+
+.pin_tiger {
+    top: 54%;
+    left: 72%;
+}
+
+@media screen and (max-width: 1200px) {
+    .map_header {
+        margin-left: 300px;
+        margin-right: 300px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .map_header {
+        margin: 20px 20px;
+    }
+
+    .map_pin {
+        width: 42px;
+        height: 60px;
+    }
+
+    .pin_icon img {
+        margin-bottom: 10px;
+        width: 24px;
+        height: 20px;
+    }
+    .header_nav-active {
+        transform: translateX(0) !important;
+    }
+}
