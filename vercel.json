@@ -1,7 +1,7 @@
 {
   "public": true,
   "rewrites": [
-    { "source": "/", "destination": "/pages/landing/index.html" },
-    { "source": "/images/(.*)", "destination": "/assets/images/$1" }
-  ]
+    { "source": "/", "destination": "/pages/landing/index.html" }
+  ],
+  "cleanUrls": true
 }
