@@ -62,53 +62,91 @@
         </div>
     </header>
     <main>
-        <div class="left_side">
-            <aside class="sidebar">
-                <button id="live-cam" onclick="updateContent('live')" aria-label="View Cam">
-                    <div class="live-status">
-                        <span class="live-text">LIVE</span>
-                        <div class="cam-icon">
-                            <img src="../../assets/icons/cam.svg" alt="cam">
+        <div class="container_ct">
+            <div class="left_side">
+                <aside class="sidebar">
+                    <button id="live-cam" onclick="updateContent('panda')" aria-label="View Cam">
+                        <div class="live-status">
+                            <span class="live-text">LIVE</span>
+                            <div class="cam-icon">
+                                <img src="../../assets/icons/cam.svg" alt="cam">
+                            </div>
                         </div>
-                    </div>
-                    <div class="deep-cam-arrow">
-                        <div class="deep-icon">
-                            <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 13.6591L8.36504 15L16 7.5L8.36504 0L7 1.34091L13.2699 7.5L7 13.6591Z" fill="white"/>
-                                <path d="M0 13.6591L1.36504 15L9 7.5L1.36504 0L0 1.34091L6.26992 7.5L0 13.6591Z" fill="white"/>
-                            </svg>
-                        </div>
-                    </div>
-                </button>
-                <button id="animal-cam-btn" class="first-ch" onclick="updateContent('panda')" aria-label="View Panda"></button>
-                <button id="animal-cam-btn" onclick="updateContent('eagle')" aria-label="View Eagle"></button>
-                <button id="animal-cam-btn" onclick="updateContent('gorilla')" aria-label="View Gorilla"></button>
-                <button id="animal-cam-btn" onclick="updateContent('lemur')" aria-label="View Lemur"></button>
-                <div class="next-cam">
-                    <button id="next-cam" onclick="updateContent('next')" aria-label="Next Cam">
-                        <div class="below-perist">
-                            <svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1.34091 0L0 1.36504L7.5 9L15 1.36504L13.6591 0L7.5 6.26992L1.34091 0Z" fill="white"/>
-                            </svg>
+                        <div class="deep-cam-arrow">
+                            <div class="deep-icon">
+                                <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 13.6591L8.36504 15L16 7.5L8.36504 0L7 1.34091L13.2699 7.5L7 13.6591Z" fill="white"/>
+                                    <path d="M0 13.6591L1.36504 15L9 7.5L1.36504 0L0 1.34091L6.26992 7.5L0 13.6591Z" fill="white"/>
+                                </svg>
+                            </div>
                         </div>
                     </button>
-                </div>
-            </aside>
+                    <button id="animal-cam-btn" class="first-ch" onclick="updateContent('panda')" aria-label="View Panda"></button>
+                    <button id="animal-cam-btn" onclick="updateContent('eagle')" aria-label="View Eagle"></button>
+                    <button id="animal-cam-btn" onclick="updateContent('gorilla')" aria-label="View Gorilla"></button>
+                    <button id="animal-cam-btn" onclick="updateContent('lemur')" aria-label="View Lemur"></button>
+                    <div class="next-cam">
+                        <button id="next-cam" onclick="updateContent('next')" aria-label="Next Cam">
+                            <div class="below-perist">
+                                <svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.34091 0L0 1.36504L7.5 9L15 1.36504L13.6591 0L7.5 6.26992L1.34091 0Z" fill="white"/>
+                                </svg>
+                            </div>
+                        </button>
+                    </div>
+                </aside>
+            </div>
+            <div class="content_wrapper">
+                <section class="animal_container sect_animal">
+                    <div class="animal-header">
+                        <h1 id="animal-title">live panda cams</h1>
+                        <button class="header-donate-btn">DONATE NOW &rarr;</button>
+                    </div>
+                    <div class="vide_fram">
+                        <iframe id="video-stream" src="https://www.youtube.com" frameborder="0" allowfullscreen></iframe>
+                        <button class="header-donate-btn" id="after-frame">DONATE NOW &rarr;</button>
+                    </div>
+                    <div class="grid-animals-view">
+                        <h2>More Live Views</h2>
+                        <div class="cards-view">
+                            <button class="nav-arrow left">&larr;</button>
+                            <div class="carousel-container" id="camera-grid">
+                                <div class="cam-card active">
+                                    <div class="label">CAM 1
+                                        <span class="live-icon">
+                                        </span>
+                                    </div>
+                                    <img src="../../assets/images/camlive1.png" alt="Panda Cam 1">
+                                    <div class="play-icon"></div>
+                                </div>
+                                <div class="cam-card">
+                                    <div class="label">CAM 2
+                                        <span class="live-icon">
+                                        </span>
+                                    </div>
+                                    <img src="../../assets/images/camlive2.png" alt="Panda Cam 2">
+                                    <div class="play-icon"></div>
+                                </div>
+                                <div class="cam-card">
+                                    <div class="label">CAM 3
+                                        <span class="live-icon">
+                                        </span>
+                                    </div>
+                                    <img src="../../assets/images/camlive3.png" alt="Panda Cam 3">
+                                    <div class="play-icon"></div>
+                                </div>
+                            </div>
+                            <button class="nav-arrow right">&rarr;</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
-        <section class="animal_container sect_animal">
-            <h1 id="animal-title">live panda cams</h1>
-            <div class="vide_fram">
-                <iframe id="video-stream" src="https://www.youtube.com" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div class="grid-animals-view">
-
-            </div>
-        </section>
         <section class="donation_section">
             <div class="info-section">
                 <div class="donation-banner donation-text">
-                    <h3 class="donation-banner-title">make the Bamboo Donation!</h3>
-                    <p>Our process for bamboo donations first starts with a site evaluation. It is important that our team sees where the bamboo is growing, then determining if the bamboo is a species that our animals are currently eating. Thank you for your interest in donating bamboo for our pandas.</p>
+                    <h3 class="donation-banner-title don-title">make the Bamboo Donation!</h3>
+                    <p class="don-text">Our process for bamboo donations first starts with a site evaluation. It is important that our team sees where the bamboo is growing, then determining if the bamboo is a species that our animals are currently eating. Thank you for your interest in donating bamboo for our pandas.</p>
                 </div>
                 <div class="donation-form donate-p">
                     <label for="Quicki">Quick Donate</label>
@@ -123,16 +161,21 @@
         <section class="animal_container content_view">
             <div class="content">
                 <article class="info-animal">
-                    <h3></h3>
-                    <p></p>
+                    <h3>did you know?</h3>
+                    <p>Pandas are often seen eating in a relaxed sitting posture, with their hind legs stretched out before them. They may appear sedentary, but they are skilled tree-climbers and efficient swimmers.</p>
                 </article>
                 <section class="animal-details">
-                    <div class="stats">
-                        <p></p>
-                        <p></p>
-                        <p></p>
+                    <div class="inner-animal-details">
+                        <div class="stats">
+                            <p><strong>Common name:</strong>Giant Panda</p>
+                            <p><strong>Type:</strong>Herbivore</p>
+                            <p></p>
+                        </div>
+                        <img src="../../assets/images/contentimg.png" alt="Animal Details" id="animal-details-img">
                     </div>
-                    <img src="" alt="Animal Details" id="animal-details-img">
+                    <div class="infoP">
+                        <p>Giant pandas are very unusual animals that eat almost exclusively bamboo, which is very low in nutrients. Because of this, they have many unique adaptations for their low-energy lifestyle. Giant pandas are solitary. They have a highly developed sense of smell that males use to avoid each other and to find females for mating in the spring. After a five-month pregnancy, females give birth to a cub or two, though they cannot care for both twins. The blind infants weigh only 5 ounces at birth and cannot crawl until they reach three months of age. They are born white, and develop their much loved coloring later. Habitat loss is the primary threat to this species. Its popularity around the world has helped the giant panda become the focus of successful conservation programs.</p>
+                    </div>
                 </section>
             </div>
         </section>
