@@ -66,33 +66,6 @@ interface IFeedbacks {
     data: Array<IFeedback>
 }
 
-async function retrieveDataFromBack (path: string): Promise<void> {
-    let PREFIX: string = '';
-
-    if (path.includes('pets')) {
-        const grid: HTMLDivElement | null = document.querySelector('.meet-animal-grid');
-        if (!grid) throw new Error(`No element found!`);
-        showLoader(6, grid);
-        PREFIX = 'pets';
-    } else if (path.includes('feedback')) {
-        PREFIX = 'feedbacks';
-    }
-
-    
-    try {
-        const response = await fetch(path);
-
-        if (!response) {
-            throw new Error(`No data found!`);
-        }
-
-        const content: IFeedbacks | IMeetAnimals = await response.json();
-        renderConent(content, PREFIX);
-    } catch (error) {
-        console.warn(`${error} occured`)
-    }
-}
-
 const movingCardsAndGrids = (): void => {
     interface GridLayoutWithChildElement {
         parent: HTMLElement,
@@ -220,20 +193,24 @@ const movingCardsAndGrids = (): void => {
     const gapColumnOfAnimalGrid: number = parseFloat(window.getComputedStyle(cardMoverElements.animalGridLayout.parent).columnGap);
 
     cardMoverElements.nextMeetbtn.addEventListener('click', (e: MouseEvent) => {
+        console.log('ameet')
         scrollCardsSlowly(gapColumnOfMeetGrid, true, cardMoverElements.meetGridLayout);
     })
 
     cardMoverElements.prevMeetBtn.addEventListener('click', (e: MouseEvent) => {
+        console.log('bmeet')
         scrollCardsSlowly(gapColumnOfMeetGrid, false, cardMoverElements.meetGridLayout);
     })
 
     let scrollPosition: number = 0;
 
     cardMoverElements.nextFeedbtn.addEventListener('click', (e: MouseEvent) => {
+        console.log('afeed')
         scrollPosition = scrollCardsOver(gapColumnOfFeedGrid, scrollPosition, cardMoverElements.feedGridLayout, -1);
     })
 
     cardMoverElements.prevFeedbtn.addEventListener('click', (e: MouseEvent) => {
+        console.log('bfeed')
         scrollPosition = scrollCardsOver(gapColumnOfFeedGrid, scrollPosition, cardMoverElements.feedGridLayout, 1);
     })
 
@@ -245,6 +222,13 @@ const movingCardsAndGrids = (): void => {
         })
     }))
 }
+
+retrieveDataFromBack(PETS_FETCH_PATH).catch(err => {
+    console.warn(err);
+});
+retrieveDataFromBack(FEEDS_FETCH_PATH).catch(err => {
+    console.warn(err);
+});
 
 movingCardsAndGrids();
 
@@ -297,6 +281,35 @@ const popUpDonationBox = () => {
 //     }
 // };
 
+async function retrieveDataFromBack (path: string): Promise<void> {
+    let PREFIX: string = '';
+    let grid: HTMLDivElement | null = null;
+
+    if (path.includes('pets')) {
+        grid = document.querySelector('.meet-animal-grid');
+        PREFIX = 'pets';
+    } else if (path.includes('feedback')) {
+        grid = document.querySelector('.feed-grid');
+        PREFIX = 'feedbacks';
+    }
+
+    if (!grid) throw new Error(`No element found!`);
+    showLoader(6, grid);
+
+    try {
+        const response = await fetch(path);
+
+        if (!response) {
+            throw new Error(`No data found!`);
+        }
+
+        const content: IFeedbacks | IMeetAnimals = await response.json();
+        renderConent(content, PREFIX);
+    } catch (error) {
+        grid.innerHTML = '<p>Something went wrong. Please, refresh the page</p>';
+    }
+}
+
 function renderConent(content: IMeetAnimals | IFeedbacks, type: string): void {    
     let contentLayout: HTMLDivElement;
     if (type === 'pets') {
@@ -348,10 +361,3 @@ function showLoader(cnt: number, grid: HTMLDivElement) {
         grid.appendChild(sk);
     }
 }
-
-retrieveDataFromBack(PETS_FETCH_PATH).catch(err => {
-    console.warn(err);
-});
-retrieveDataFromBack(FEEDS_FETCH_PATH).catch(err => {
-    console.warn(err);
-});
