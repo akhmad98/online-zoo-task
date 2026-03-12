@@ -97,7 +97,7 @@ function getElementGenericWay<T extends HTMLElement>(selector: string, byId: boo
     return  el;
 }
 
-const updatePageHeadersAndTitles = (animalKey: string): void => {
+(window as any).updateContent = function(animalKey: string): void {
     const data = ANIMAL_PAGE_DATA[animalKey] as IPageData;
     if (!data) return;
 
@@ -138,4 +138,4 @@ const updatePageHeadersAndTitles = (animalKey: string): void => {
     })
 }
 
-(window as any).updateContent = updatePageHeadersAndTitles;
+// (window as any).updateContent = updatePageHeadersAndTitles;
