@@ -496,6 +496,10 @@ body {
         transition: all 0.2s ease;
     }
 
+    #animal-cam-btn:active {
+         background-color: var(--inner-border-color);
+    }
+
     .sidebar button.active {
         background-color: var(--inner-border-color);
     }
