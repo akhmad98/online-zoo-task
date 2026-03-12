@@ -1,3 +1,6 @@
+const PETS_FETCH_PATH: string = 'https://vsqsnqnxkh.execute-api.eu-central-1.amazonaws.com/prod/pets';
+const FEEDS_FETCH_PATH: string = 'https://vsqsnqnxkh.execute-api.eu-central-1.amazonaws.com/prod/feedback';
+
 (function(): void {
     const ACTIVE_CLASS: string = 'header_nav-active';
     interface IBurgerMenuElements {
@@ -39,6 +42,56 @@
     })
 })()
 
+interface IMeetAnimal {
+    id: number,
+    name: string,
+    commonName: string,
+    description: string
+}
+
+interface IMeetAnimals {
+    data: Array<IMeetAnimal>
+}
+
+interface IFeedback {
+    id: number,
+    city: string,
+    month:  string,
+    year: string,
+    text: string,
+    name: string,
+}
+
+interface IFeedbacks {
+    data: Array<IFeedback>
+}
+
+async function retrieveDataFromBack (path: string): Promise<void> {
+    let PREFIX: string = '';
+
+    if (path.includes('pets')) {
+        const grid: HTMLDivElement | null = document.querySelector('.meet-animal-grid');
+        if (!grid) throw new Error(`No element found!`);
+        showLoader(6, grid);
+        PREFIX = 'pets';
+    } else if (path.includes('feedback')) {
+        PREFIX = 'feedbacks';
+    }
+
+    
+    try {
+        const response = await fetch(path);
+
+        if (!response) {
+            throw new Error(`No data found!`);
+        }
+
+        const content: IFeedbacks | IMeetAnimals = await response.json();
+        renderConent(content, PREFIX);
+    } catch (error) {
+        console.warn(`${error} occured`)
+    }
+}
 
 const movingCardsAndGrids = (): void => {
     interface GridLayoutWithChildElement {
@@ -243,3 +296,62 @@ const popUpDonationBox = () => {
 //         };
 //     }
 // };
+
+function renderConent(content: IMeetAnimals | IFeedbacks, type: string): void {    
+    let contentLayout: HTMLDivElement;
+    if (type === 'pets') {
+        const data = content.data as Array<IMeetAnimal>;
+
+        contentLayout = document.querySelector('.meet-animal-grid') as HTMLDivElement;
+        data.forEach((el: IMeetAnimal, ind: number) => {
+            const card: HTMLDivElement = document.createElement('div');
+            card.className = 'meet-animal-card';
+            card.innerHTML = `
+                <div class="meet-animal-card">
+                    <div class="card-image-wrapper">
+                        <span class="pet-name">${el.name}</span>
+                        <img src="../../assets/images/koala.png" alt="${el.commonName}">
+                    </div>
+                    <div class="meet-content">
+                        <h3>Giant Panda</h3>
+                        <p>${el.description}</p>
+                        <a href="#" class="feed-link">VIEW LIVE CAM →</a>
+                    </div>
+                </div>
+            `;
+            contentLayout.append(card);
+        });
+    } else if (type === 'feedbacks') {
+        const data = content.data as Array<IFeedback>;
+        contentLayout = document.querySelector('.feed-grid') as HTMLDivElement;
+        data.forEach((el: IFeedback) => {
+            const card: HTMLDivElement = document.createElement('div');
+            card.className = 'feed-card';
+            card.innerHTML = `
+                <span class="quote">“</span>
+                <h3 class="location-date">${el.city}, ${el.month} ${el.year}</h3>
+                <p class="feed-text">${el.text}</p>
+                <p class="user-name">${el.name}</p>
+            `;
+            contentLayout.append(card);
+        });
+    }
+}
+
+function showLoader(cnt: number, grid: HTMLDivElement) {
+    grid.innerHTML = '';
+    for (let i = 0; i < cnt; i++) {
+        const sk: HTMLDivElement = document.createElement('div');
+        sk.className = 'skeleton-card';
+        sk.style.width = `${grid.clientWidth}`;
+        sk.style.height = `${grid.clientHeight}`;
+        grid.appendChild(sk);
+    }
+}
+
+retrieveDataFromBack(PETS_FETCH_PATH).catch(err => {
+    console.warn(err);
+});
+retrieveDataFromBack(FEEDS_FETCH_PATH).catch(err => {
+    console.warn(err);
+});

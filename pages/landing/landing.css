@@ -430,7 +430,6 @@ body, html {
     scrollbar-width: none;
 }
 
-
 .card-image-wrapper {
     position: relative;
     height: 60%;
@@ -1771,4 +1770,16 @@ body, html {
     .feed-controls {
         display: none;
     }
+}
+
+@keyframes shimmer {
+    0% { background-position: -440px 0; }
+    100% { background-position: 440px 0; }
+}
+
+.skeleton-card {
+    background: linear-gradient(90deg, #aaa5b4 25%, #8e8b93 50%, #dcd8e4 75%);
+    background-size: 880px 750px;
+    animation: shimmer 1.5s infinite linear;
+    border-radius: 5px;
 }
