@@ -51,6 +51,28 @@
                             <i class="fab fa-facebook-f"></i>
                         </a>
                     </div>
+                    <div class="header_user-container">
+                        <div class="user-trigger" id="user_trigger">
+                            <span id="userName" class="user-name"></span>
+                            <div class="user-icon">
+                                <img src="/assets/icons/user-icon.svg" alt="Me">
+                            </div>
+                        </div>
+                        <div id="userPopup" class="user-popup hidden">
+                            <div id="loggedOutContent" class="popup-group hidden">
+                                <a href="/signin" class="popup-item">Sign In</a>
+                                <a href="/register" class="popup-item">Registration</a>
+                            </div>
+                            <div id="loggedInContent" class="popup-group hidden">
+                                <div class="user-info">
+                                    <p id="infoName" class="info-label"></p>
+                                    <p id="infoEmail" class="info-sub"></p>
+                                </div>
+                                <hr>
+                                <button id="signOutBtn" class="popup-item sign-out">Sign Out</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="header_burger burger">
                     <span class="burger-line burger-line-first"></span>
@@ -328,6 +350,6 @@
             </div>
         </div>
     </footer>
-    <script src="./landing.ts"></script>
+    <script type="module" src="./landing.ts"></script>
 </body>
 </html>

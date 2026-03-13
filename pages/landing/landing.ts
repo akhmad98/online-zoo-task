@@ -1,5 +1,12 @@
-const PETS_FETCH_PATH: string = 'https://vsqsnqnxkh.execute-api.eu-central-1.amazonaws.com/prod/pets';
-const FEEDS_FETCH_PATH: string = 'https://vsqsnqnxkh.execute-api.eu-central-1.amazonaws.com/prod/feedback';
+import { FEEDS_FETCH_PATH, PETS_FETCH_PATH, NUMBER_LOADER } from "./constants/constants.ts";
+import type { IFeedback } from "./interfaces/IFeedback.ts";
+import type { IFeedbacks } from "./interfaces/IFeedbacks.ts";
+import type { IMeetAnimal } from "./interfaces/IMeetAnimal.ts";
+import type { IMeetAnimals } from "./interfaces/IMeetAnimals.ts";
+import { SliderByScroll } from "./components/SliderByScroll.ts";
+import type { ICardMoverElements } from "./interfaces/ICardMoverElements.ts";
+import type { IGridLaytouWithChildren } from "./interfaces/IGridLaytouWithChildren";
+import { hideLoader, showLoader, tipByDot } from "./utils/util.ts";
 
 (function(): void {
     const ACTIVE_CLASS: string = 'header_nav-active';
@@ -42,54 +49,14 @@ const FEEDS_FETCH_PATH: string = 'https://vsqsnqnxkh.execute-api.eu-central-1.am
     })
 })()
 
-interface IMeetAnimal {
-    id: number,
-    name: string,
-    commonName: string,
-    description: string
-}
-
-interface IMeetAnimals {
-    data: Array<IMeetAnimal>
-}
-
-interface IFeedback {
-    id: number,
-    city: string,
-    month:  string,
-    year: string,
-    text: string,
-    name: string,
-}
-
-interface IFeedbacks {
-    data: Array<IFeedback>
-}
-
-const movingCardsAndGrids = (): void => {
-    interface GridLayoutWithChildElement {
-        parent: HTMLElement,
-        childs: Array<Element>,
-    }
-    interface ICardMoverElements {
-        meetGridLayout: GridLayoutWithChildElement,
-        feedGridLayout: GridLayoutWithChildElement,
-        nextFeedbtn: HTMLElement,
-        prevFeedbtn: HTMLElement,
-        nextMeetbtn: HTMLElement,
-        prevMeetBtn: HTMLElement,
-        animalGridLayout: GridLayoutWithChildElement,
-        dots: NodeListOf<HTMLElement>,
-    }
-
-    function getElementsParentChild<T extends HTMLElement>(selector: string): GridLayoutWithChildElement {
+const movingCardsAndGrids = async (): Promise<void> => {
+    function getElementsParentChild<T extends HTMLElement>(selector: string): IGridLaytouWithChildren {
         const parent: T | null = document.querySelector<T>(selector);
 
         if (!parent) {
             throw new Error(`No ${selector} element found`);
         }
 
-        parent.children[0]?.id
         return {
             parent: parent,
             childs: [...parent.children],
@@ -123,23 +90,64 @@ const movingCardsAndGrids = (): void => {
         animalGridLayout: getElementsParentChild<HTMLElement>('.animal-grid'),
         dots: getElementGenericly<HTMLElement>('.dot', true),
     }
+    const gapColumnOfMeetGrid: number = parseFloat(window.getComputedStyle(cardMoverElements.meetGridLayout.parent).columnGap);
+    const gapColumnOfFeedGrid: number = parseFloat(window.getComputedStyle(cardMoverElements.feedGridLayout.parent).columnGap);
+    const gapColumnOfAnimalGrid: number = parseFloat(window.getComputedStyle(cardMoverElements.animalGridLayout.parent).columnGap);
+    let feederSlider: SliderByScroll<IFeedback>;
+    let meeterSlider: SliderByScroll<IMeetAnimal>;
 
-    function scrollCardsSlowly(gapWidth: number, scrollToLeft: boolean, gridEl: GridLayoutWithChildElement) {
-        let cardWidth: number = 0;
-        if (gridEl.childs.length > 0
-                && gridEl.childs[0]
-        ) {
-            if (scrollToLeft) {
-                cardWidth = gridEl.childs[0]?.clientWidth;
-                gridEl.parent.scrollLeft += (cardWidth + gapWidth);
-            } else {
-                cardWidth = gridEl.childs[0]?.clientWidth;
-                gridEl.parent.scrollLeft -= (cardWidth + gapWidth);
+    showLoader(NUMBER_LOADER, cardMoverElements.feedGridLayout.parent);
+    showLoader(NUMBER_LOADER, cardMoverElements.meetGridLayout.parent);
+    try {
+        const resultFromFeeds: IFeedbacks = await retrieveDataFromBack<IFeedbacks>(FEEDS_FETCH_PATH);
+        const resultFromMeets: IMeetAnimals = await retrieveDataFromBack<IMeetAnimals>(PETS_FETCH_PATH);
+
+        feederSlider = new SliderByScroll<IFeedback>(
+            cardMoverElements.feedGridLayout, 
+            resultFromFeeds.data, 
+            gapColumnOfFeedGrid, 
+            (item) => {
+                return `
+                    <span class="quote">“</span>
+                    <h3 class="location-date">${item.city}, ${item.month} ${item.year}</h3>
+                    <p class="feed-text">${item.text}</p>
+                    <p class="user-name">${item.name}</p>
+                `;
             }
-        }
+        );
+        meeterSlider = new SliderByScroll<IMeetAnimal>(
+            cardMoverElements.meetGridLayout, 
+            resultFromMeets.data, 
+            gapColumnOfMeetGrid, 
+            (item) => {
+                return `
+                    <div class="meet-animal-card">
+                        <div class="card-image-wrapper">
+                            <span class="pet-name">${item.name}</span>
+                            <img src="../../assets/images/koala.png" alt="${item.commonName}">
+                        </div>
+                        <div class="meet-content">
+                            <h3>Giant Panda</h3>
+                            <p>${item.description}</p>
+                            <a href="#" class="feed-link">VIEW LIVE CAM →</a>
+                        </div>
+                    </div>
+                `;
+            }
+        );
+    } catch (error) {
+        console.log(error)
+        const divGrid = document.querySelector('.meet-animal-grid');
+        const errorMsg = document.createElement('p');
+        errorMsg.innerHTML = 'Something went wrong! Refresh the page.';
+        errorMsg.classList.add('error-msg');
+        divGrid?.appendChild(errorMsg);
+    } finally {
+        hideLoader(cardMoverElements.feedGridLayout.parent);
+        hideLoader(cardMoverElements.meetGridLayout.parent);
     }
     
-    function scrollCardsOver(gapWidth: number, scrlPost: number, gridEl: GridLayoutWithChildElement, direction: number): number {
+    function scrollCardsOver(gapWidth: number, scrlPost: number, gridEl: IGridLaytouWithChildren, direction: number): number {
         let cardWidth: number = 0;
         const maxScroll: number = gridEl.parent.scrollWidth - gridEl.parent.clientWidth;
 
@@ -163,21 +171,6 @@ const movingCardsAndGrids = (): void => {
         return scrlPost;
     }
 
-    function tipByDot(gapWidth: number, indiceDOT: number, gridEl: GridLayoutWithChildElement) {
-        let cardWidth: number = 0;
-        if (gridEl.childs.length > 0
-                && gridEl.childs[0]
-        ) {
-            cardWidth = gridEl.childs[0].clientWidth;
-            const scrlAmnt: number = indiceDOT * (cardWidth + gapWidth);
-
-            cardMoverElements.animalGridLayout.parent.scrollTo({
-                left: scrlAmnt,
-                behavior: 'smooth',
-            });
-        }
-    }
-
     function updateActiveDot(actIndx: number) {
         cardMoverElements.dots.forEach((dot: HTMLElement, i: number) => {
             if (i === actIndx) {
@@ -188,29 +181,23 @@ const movingCardsAndGrids = (): void => {
         })
     }
 
-    const gapColumnOfMeetGrid: number = parseFloat(window.getComputedStyle(cardMoverElements.meetGridLayout.parent).columnGap);
-    const gapColumnOfFeedGrid: number = parseFloat(window.getComputedStyle(cardMoverElements.feedGridLayout.parent).columnGap);
-    const gapColumnOfAnimalGrid: number = parseFloat(window.getComputedStyle(cardMoverElements.animalGridLayout.parent).columnGap);
-
     cardMoverElements.nextMeetbtn.addEventListener('click', (e: MouseEvent) => {
-        console.log('ameet')
-        scrollCardsSlowly(gapColumnOfMeetGrid, true, cardMoverElements.meetGridLayout);
+        meeterSlider.scroll(true);
     })
 
     cardMoverElements.prevMeetBtn.addEventListener('click', (e: MouseEvent) => {
-        console.log('bmeet')
-        scrollCardsSlowly(gapColumnOfMeetGrid, false, cardMoverElements.meetGridLayout);
+        meeterSlider.scroll(false);
     })
 
     let scrollPosition: number = 0;
 
     cardMoverElements.nextFeedbtn.addEventListener('click', (e: MouseEvent) => {
-        console.log('afeed')
+        // feederSlider.scroll(true);
         scrollPosition = scrollCardsOver(gapColumnOfFeedGrid, scrollPosition, cardMoverElements.feedGridLayout, -1);
     })
 
     cardMoverElements.prevFeedbtn.addEventListener('click', (e: MouseEvent) => {
-        console.log('bfeed')
+        // feederSlider.scroll(false);
         scrollPosition = scrollCardsOver(gapColumnOfFeedGrid, scrollPosition, cardMoverElements.feedGridLayout, 1);
     })
 
@@ -223,14 +210,9 @@ const movingCardsAndGrids = (): void => {
     }))
 }
 
-retrieveDataFromBack(PETS_FETCH_PATH).catch(err => {
+movingCardsAndGrids().catch((err) => {
     console.warn(err);
 });
-retrieveDataFromBack(FEEDS_FETCH_PATH).catch(err => {
-    console.warn(err);
-});
-
-movingCardsAndGrids();
 
 const popUpDonationBox = () => {
     interface IPopUpBoxElements {
@@ -281,83 +263,19 @@ const popUpDonationBox = () => {
 //     }
 // };
 
-async function retrieveDataFromBack (path: string): Promise<void> {
-    let PREFIX: string = '';
-    let grid: HTMLDivElement | null = null;
-
-    if (path.includes('pets')) {
-        grid = document.querySelector('.meet-animal-grid');
-        PREFIX = 'pets';
-    } else if (path.includes('feedback')) {
-        grid = document.querySelector('.feed-grid');
-        PREFIX = 'feedbacks';
-    }
-
-    if (!grid) throw new Error(`No element found!`);
-    showLoader(6, grid);
-
+async function retrieveDataFromBack<T> (path: string): Promise<T> {
     try {
         const response = await fetch(path);
 
-        if (!response) {
+        if (!response.ok) {
             throw new Error(`No data found!`);
         }
 
-        const content: IFeedbacks | IMeetAnimals = await response.json();
-        renderConent(content, PREFIX);
+        const content = await response.json();
+        return content;
+        
     } catch (error) {
-        grid.innerHTML = '<p>Something went wrong. Please, refresh the page</p>';
-    }
-}
-
-function renderConent(content: IMeetAnimals | IFeedbacks, type: string): void {    
-    let contentLayout: HTMLDivElement;
-    if (type === 'pets') {
-        const data = content.data as Array<IMeetAnimal>;
-
-        contentLayout = document.querySelector('.meet-animal-grid') as HTMLDivElement;
-        data.forEach((el: IMeetAnimal, ind: number) => {
-            const card: HTMLDivElement = document.createElement('div');
-            card.className = 'meet-animal-card';
-            card.innerHTML = `
-                <div class="meet-animal-card">
-                    <div class="card-image-wrapper">
-                        <span class="pet-name">${el.name}</span>
-                        <img src="../../assets/images/koala.png" alt="${el.commonName}">
-                    </div>
-                    <div class="meet-content">
-                        <h3>Giant Panda</h3>
-                        <p>${el.description}</p>
-                        <a href="#" class="feed-link">VIEW LIVE CAM →</a>
-                    </div>
-                </div>
-            `;
-            contentLayout.append(card);
-        });
-    } else if (type === 'feedbacks') {
-        const data = content.data as Array<IFeedback>;
-        contentLayout = document.querySelector('.feed-grid') as HTMLDivElement;
-        data.forEach((el: IFeedback) => {
-            const card: HTMLDivElement = document.createElement('div');
-            card.className = 'feed-card';
-            card.innerHTML = `
-                <span class="quote">“</span>
-                <h3 class="location-date">${el.city}, ${el.month} ${el.year}</h3>
-                <p class="feed-text">${el.text}</p>
-                <p class="user-name">${el.name}</p>
-            `;
-            contentLayout.append(card);
-        });
-    }
-}
-
-function showLoader(cnt: number, grid: HTMLDivElement) {
-    grid.innerHTML = '';
-    for (let i = 0; i < cnt; i++) {
-        const sk: HTMLDivElement = document.createElement('div');
-        sk.className = 'skeleton-card';
-        sk.style.width = `${grid.clientWidth}`;
-        sk.style.height = `${grid.clientHeight}`;
-        grid.appendChild(sk);
+        console.error("Somtheing weng wrong: ", error);
+        throw error;
     }
 }
