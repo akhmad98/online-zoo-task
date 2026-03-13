@@ -1,33 +1,9 @@
-interface IAnimalData {
-    readonly [key: string]: string,
-}
-
-interface IAnimalPageData {
-    readonly [key: string]: IAnimalData,
-}
-
-interface IPageData extends IAnimalData {
-    title: string,
-    video: string,
-    donTitle: string,
-    donText: string,
-    infoDesc: string,
-    stats: string,
-    statInfo: string,
-    img: string,
-}
-
-interface IPageDataFields {
-    animalTitle: HTMLElement,
-    donationTitle: HTMLElement,
-    donationText: HTMLElement,
-    infoDesc: HTMLElement,
-    animalStatsInfo: HTMLElement,
-    animalDetailsImg: HTMLImageElement,
-    animalVideoFrame: HTMLIFrameElement,
-    sidebarButtons: NodeListOf<HTMLElement>,
-    animalLastInfo: HTMLElement,
-}
+import type { IPageDataFields } from "../interfaces/IPageDataFields";
+import type { IAnimalPageData } from "../interfaces/IAnimalData";
+import type { IPageData } from "../interfaces/IPageData";
+import { api } from "../utils/api.ts";
+import type { IPet } from "../interfaces/api.interface/pet.interface.ts";
+import type { ICameras } from "../interfaces/api.interface/cameras.interface.ts";
 
 const ANIMAL_PAGE_DATA: IAnimalPageData = {
     panda: {

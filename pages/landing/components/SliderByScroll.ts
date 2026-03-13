@@ -1,4 +1,4 @@
-import type { IGridLaytouWithChildren } from "../interfaces/IGridLaytouWithChildren.ts";
+import type { IGridLaytouWithChildren } from "../../interfaces/IGridLaytouWithChildren";
 
 export class SliderByScroll<T extends { id: number, name: string }> {
     private grid: IGridLaytouWithChildren;

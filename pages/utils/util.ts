@@ -1,4 +1,4 @@
-import type { IGridLaytouWithChildren } from "../interfaces/IGridLaytouWithChildren.ts";
+import type { IGridLaytouWithChildren } from "../interfaces/IGridLaytouWithChildren";
 
 export function showLoader(cnt: number, grid: HTMLElement) {
     grid.innerHTML = '';

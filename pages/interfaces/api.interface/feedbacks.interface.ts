@@ -1,0 +1,1 @@
+export type { IFeedbacks } from "../IFeedbacks.ts";

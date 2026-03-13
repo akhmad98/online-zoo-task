@@ -1,12 +1,14 @@
-import { FEEDS_FETCH_PATH, PETS_FETCH_PATH, NUMBER_LOADER } from "./constants/constants.ts";
-import type { IFeedback } from "./interfaces/IFeedback.ts";
-import type { IFeedbacks } from "./interfaces/IFeedbacks.ts";
-import type { IMeetAnimal } from "./interfaces/IMeetAnimal.ts";
-import type { IMeetAnimals } from "./interfaces/IMeetAnimals.ts";
+import { FEEDS_FETCH_PATH, PETS_FETCH_PATH, NUMBER_LOADER } from "../constants/constants";
+import type { IFeedback } from "../interfaces/IFeedback";
+import type { IFeedbacks } from "../interfaces/IFeedbacks";
+import type { IMeetAnimal } from "../interfaces/IMeetAnimal";
+import type { IMeetAnimals } from "../interfaces/IMeetAnimals";
 import { SliderByScroll } from "./components/SliderByScroll.ts";
-import type { ICardMoverElements } from "./interfaces/ICardMoverElements.ts";
-import type { IGridLaytouWithChildren } from "./interfaces/IGridLaytouWithChildren";
-import { hideLoader, showLoader, tipByDot } from "./utils/util.ts";
+import type { ICardMoverElements } from "../interfaces/ICardMoverElements";
+import type { IGridLaytouWithChildren } from "../interfaces/IGridLaytouWithChildren";
+import { hideLoader, showLoader, tipByDot } from "../utils/util";
+import { api } from "../utils/api.ts";
+import type { IAnimals } from "../interfaces/api.interface/pets.interface.ts";
 
 (function(): void {
     const ACTIVE_CLASS: string = 'header_nav-active';
@@ -99,8 +101,8 @@ const movingCardsAndGrids = async (): Promise<void> => {
     showLoader(NUMBER_LOADER, cardMoverElements.feedGridLayout.parent);
     showLoader(NUMBER_LOADER, cardMoverElements.meetGridLayout.parent);
     try {
-        const resultFromFeeds: IFeedbacks = await retrieveDataFromBack<IFeedbacks>(FEEDS_FETCH_PATH);
-        const resultFromMeets: IMeetAnimals = await retrieveDataFromBack<IMeetAnimals>(PETS_FETCH_PATH);
+        const resultFromFeeds: IFeedbacks = await api.request<IFeedbacks>('/feedback');
+        const resultFromMeets: IMeetAnimals = await api.request<IAnimals>('/pets');
 
         feederSlider = new SliderByScroll<IFeedback>(
             cardMoverElements.feedGridLayout, 
@@ -262,20 +264,3 @@ const popUpDonationBox = () => {
 //         };
 //     }
 // };
-
-async function retrieveDataFromBack<T> (path: string): Promise<T> {
-    try {
-        const response = await fetch(path);
-
-        if (!response.ok) {
-            throw new Error(`No data found!`);
-        }
-
-        const content = await response.json();
-        return content;
-        
-    } catch (error) {
-        console.error("Somtheing weng wrong: ", error);
-        throw error;
-    }
-}
