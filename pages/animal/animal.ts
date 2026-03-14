@@ -15,8 +15,6 @@ let ANIMAL_PAGE_DATA: IAnimalPageData = {};
     await getFirstFourCameraDetails(cameraUrl);
     const wrapper = getElementGenericWay<HTMLElement>('.sidebar', false);
     createButtonsForSidebar(wrapper);
-    // Object.keys(ANIMAL_PAGE_DATA).forEach((el, ind) => {
-    //     let label: string = '';
     //     if (ANIMAL_PAGE_DATA[el]?.title?.match(regexAnimal)) {
     //         const strInArr: Array<string> | null = ANIMAL_PAGE_DATA[el]?.title?.match(regexAnimal);
     //         if (strInArr && strInArr.length > 0 && strInArr[0]) {
@@ -164,6 +162,8 @@ function createButtonsForSidebar(wrapper: HTMLElement) {
             await showAllCameras(cameraUrl);
             createButtonsForSidebar(animalElementsByPage.sidebar);
         }
+
+        // retrieve by id
     } catch (error) {
         throw new Error(`Error: ${error}`);
     }
@@ -198,5 +198,3 @@ function createButtonsForSidebar(wrapper: HTMLElement) {
         }
     })
 }
-
-// (window as any).updateContent = updatePageHeadersAndTitles;
