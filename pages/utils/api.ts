@@ -1,4 +1,8 @@
 import { BASE_URL } from "../constants/constants.ts";
+import type { ICameras, ICamera } from "../interfaces/api.interface/cameras.interface";
+import type { IPet } from "../interfaces/api.interface/pet.interface";
+import { CameraAndPet } from "../interfaces/camera.dtos/camera.dto";
+import { Pet } from "../interfaces/camera.dtos/pet.dto";
 type RequestInterceptor = (config: RequestInit) => RequestInit | Promise<RequestInit>;
 type ResponseInterceptor = (response: Response) => Response | Promise<Response>;
 
@@ -44,17 +48,53 @@ class ApiClient {
         return response.json() as Promise<T>;
     }
 
-    async requestFirstFourCamersAndPetsById(endpoint: string, options: RequestInit = {}): Promise<any> {
-         let config = { ...options };
+    async requestById<T>(endpoint: string, id: number): Promise<T> {
+        const url = `${endpoint}/${id}`;
+        const result = await this.request<T>(url);
+        return result as Promise<T>;
+    }
 
-        for (const interceptor of this.requestInterceptors) {
-            config = await interceptor(config);
+
+    async requestFirstFourCamersAndPetsById(endpoint: string, options: RequestInit = {}): Promise<Array<ICamera>> {
+        // let firstFourDataAndPet: Array<CameraAndPet> = [];
+        let firstFourData: Array<ICamera> = [];
+        try {
+            const response: ICameras = await this.request<ICameras>(endpoint, options);
+            firstFourData = response.data.slice(0, 4);
+            if (firstFourData.length === 0) {
+                throw new Error("Data not found!");
+            }
+        } catch (error) {
+            throw new Error(`Error: ${error}`);
         }
 
-        const url = `${this.baseUrl}${endpoint}`;
-        let response = await fetch(url, config);
-
-        
+        // for (const [ind, data] of firstFourData.entries()) {
+        //     try {
+        //         const resultFromById: IPet = await this.requestById(`/pets`, data.petId);
+        //         if (!resultFromById) {
+        //             throw new Error('Data not found');
+        //         }
+        //         const newPet: Pet = new Pet(
+        //             resultFromById.commonName,
+        //             resultFromById.scientificName,
+        //             resultFromById.type,
+        //             resultFromById.size,
+        //             resultFromById.diet,
+        //             resultFromById.habitat,
+        //             resultFromById.range,
+        //             resultFromById.latitude,
+        //             resultFromById.longitude,
+        //             resultFromById.description,
+        //             resultFromById.detailedDescription,
+        //             resultFromById.id
+        //         );
+        //         const newCamera: CameraAndPet = new CameraAndPet(data.petId, data.text, data.id, newPet);
+        //         firstFourDataAndPet.push(newCamera);       
+        //     } catch (error) {
+        //         throw new Error(`Error: ${error}`);
+        //     }
+        // }
+        return firstFourData;
     }
 }
 

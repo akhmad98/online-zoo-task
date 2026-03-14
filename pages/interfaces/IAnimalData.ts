@@ -1,7 +1,7 @@
 interface IAnimalData {
-    readonly [key: string]: string,
+    [key: string]: string,
 }
 
 export interface IAnimalPageData {
-    readonly [key: string]: IAnimalData,
+    [key: string]: IAnimalData,
 }

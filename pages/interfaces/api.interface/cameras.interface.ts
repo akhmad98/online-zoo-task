@@ -1,4 +1,4 @@
-interface ICamera {
+export interface ICamera {
     id: number,
     petId: number,
     text: string,
