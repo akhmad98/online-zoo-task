@@ -15,35 +15,6 @@ let ANIMAL_PAGE_DATA: IAnimalPageData = {};
     await getFirstFourCameraDetails(cameraUrl);
     const wrapper = getElementGenericWay<HTMLElement>('.sidebar', false);
     createButtonsForSidebar(wrapper);
-    //     if (ANIMAL_PAGE_DATA[el]?.title?.match(regexAnimal)) {
-    //         const strInArr: Array<string> | null = ANIMAL_PAGE_DATA[el]?.title?.match(regexAnimal);
-    //         if (strInArr && strInArr.length > 0 && strInArr[0]) {
-    //             label = capitalizeFirstLetter(strInArr[0]);
-    //         }
-    //     }
-    //     const btns: HTMLButtonElement = document.createElement('button');
-    //     if (ind === 0) {
-    //         btns.classList.add('first-ch');
-    //     }
-    //     btns.id = 'animal-cam-btn';
-    //     btns.setAttribute('aria-label', `View ${label}`);
-    //     btns.setAttribute('click', `updateContent(${el})`);
-    //     wrapper.appendChild(btns);
-    // });
-    // const showAllBTns: HTMLElement = document.createElement('div');
-    // showAllBTns.className = 'next-cam';
-    // showAllBTns.innerHTML = `
-    //                 <div class="next-cam">
-    //                     <button id="next-cam" onclick="updateContent('showAll')" aria-label="Next All Cam">
-    //                         <div class="below-perist">
-    //                             <svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-    //                                 <path d="M1.34091 0L0 1.36504L7.5 9L15 1.36504L13.6591 0L7.5 6.26992L1.34091 0Z" fill="white"/>
-    //                             </svg>
-    //                         </div>
-    //                     </button>
-    //                 </div>
-    //                 `;
-    // wrapper.appendChild(showAllBTns);
 })()
 
 async function getFirstFourCameraDetails(cameraUrl: string): Promise<void> {
@@ -123,7 +94,7 @@ function createButtonsForSidebar(wrapper: HTMLElement) {
         }
         btns.id = 'animal-cam-btn';
         btns.setAttribute('aria-label', `View ${label}`);
-        btns.setAttribute('click', `updateContent(${el})`);
+        btns.setAttribute('onclick', `updateContent('${el}')`);
         wrapper.appendChild(btns);
     });
     if (wrapper.children.length < 6) {
@@ -163,18 +134,31 @@ function createButtonsForSidebar(wrapper: HTMLElement) {
             createButtonsForSidebar(animalElementsByPage.sidebar);
         }
 
+        const matchedString = trigger.split('-')[1]?.match(/\d/)?.[0];
+        if (!matchedString) console.error('No camera found');
+        const getIdFromAttr = matchedString ? parseInt(matchedString) : 0;
         // retrieve by id
+        const petByID = await api.requestById<IPet>('/pets', getIdFromAttr);
+        if (petByID) {
+            console.log(petByID, 'data')
+            if (ANIMAL_PAGE_DATA[trigger]) {
+                ANIMAL_PAGE_DATA[trigger].donText = 'yesssss';
+                console.log(ANIMAL_PAGE_DATA[trigger])
+            }
+                //ANIMAL_PAGE_DATA[trigger].donTitle += `${petByID.commonName}`;
+            if (ANIMAL_PAGE_DATA[trigger]) ANIMAL_PAGE_DATA[trigger].infoDesc = `${petByID.description}`;
+            if (ANIMAL_PAGE_DATA[trigger]) ANIMAL_PAGE_DATA[trigger].lastInfo = `${petByID.detailedDescription}`;
+            if (ANIMAL_PAGE_DATA[trigger]) ANIMAL_PAGE_DATA[trigger].donText = `${petByID.description}`;
+        }
+        // if (ANIMAL_PAGE_DATA[trigger]) ANIMAL_PAGE_DATA[trigger].statsInfo = `${petByID.commonName}`;
+        
     } catch (error) {
         throw new Error(`Error: ${error}`);
     }
 
     const data = ANIMAL_PAGE_DATA[trigger] as IPageData;
-    console.log(data)
     if (!data) return;
 
-
-
-    console.log(data.img)
     if (animalElementsByPage.animalTitle)  animalElementsByPage.animalTitle.textContent = data.title;
     if (animalElementsByPage.animalStatsInfo) animalElementsByPage.animalStatsInfo.innerHTML = data.statsInfo ? data.statsInfo : '';
     if (animalElementsByPage.animalVideoFrame) animalElementsByPage.animalVideoFrame.src = data.video;
