@@ -8,4 +8,5 @@ export interface IPageDataFields {
     animalVideoFrame: HTMLIFrameElement,
     sidebarButtons: NodeListOf<HTMLElement>,
     animalLastInfo: HTMLElement,
+    sidebar: HTMLElement,
 }
