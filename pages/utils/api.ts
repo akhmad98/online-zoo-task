@@ -47,8 +47,8 @@ class ApiClient {
 
     async requestById<T>(endpoint: string, id: number): Promise<T> {
         const url = `${endpoint}/${id}`;
-        const result = await this.request<T>(url);
-        return result as Promise<T>;
+        const result = await this.request<{ data: T }>(url);
+        return result.data as Promise<T>;
     }
 
 
