@@ -323,6 +323,11 @@ body {
     flex-direction: column;
 }
 
+.inner-animal-details img {
+    width: 600px;
+    height: 600px;
+}
+
 @media (min-width: 1200px) {
     .left_side {
         width: 115px;
@@ -436,7 +441,9 @@ body {
     }
 
     .inner-animal-details img {
-        order: 2
+        order: 2;
+        width: 455px;
+        height: 455px;
     }
 
     .inner-animal-details .stats {
@@ -566,6 +573,8 @@ body {
     }
 
     .inner-animal-details img {
+        width: 440px;
+        height: 440px;
         order: 2
     }
 
