@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Zoo Map</title>
+    <link rel="stylesheet" href="../landing/landing.css">
+    <link rel="stylesheet" href="./animal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<body>
+    <header class="header">
+        <div class="wrapper">
+            <div class="header_wrapper">
+                <div class="header_logo">
+                    <a href="#" class="header_logo-link">
+                        <img src="/images/logo.svg" alt="Watch Online Zoo Live">
+                    </a>
+                </div>
+                <div class="header_nav_social">
+                    <nav class="header_nav">
+                        <ul class="header-list">
+                            <li class="header-item">
+                                <a href="/pages/landing/index.html#about" class="header-link">About</a>
+                            </li>
+                            <li class="header-item">
+                                <a href="/pages/map/map.html" class="header-link">Map</a>
+                            </li>
+                            <li class="header-item">
+                                <a href="#" class="header-link">Zoos</a>
+                            </li>
+                            <li class="header-item">
+                                <a href="/pages/contacts/contact.html" class="header-link">Contact us</a>
+                            </li>
+                            <li class="header-item">
+                                <a href="#" class="header-link">Design</a>
+                            </li>
+                        </ul>
+                        <div class="header_nav-close">
+                            <span class="header_nav-line"></span>
+                            <span class="header_nav-line"></span>
+                        </div>
+                    </nav>
+                    <div class="header_social social_links">
+                        <a href="#" class="social-icon youtube" target="_blank" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://instagram.com/akhmad69850" class="social-icon instagram" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon facebook" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="header_burger burger">
+                    <span class="burger-line burger-line-first"></span>
+                    <span class="burger-line burger-line-second"></span>
+                    <span class="burger-line burger-line-third"></span>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container_ct">
+            <div class="left_side">
+                <aside class="sidebar">
+                    <button id="live-cam" onclick="updateContent('panda')" aria-label="View Cam">
+                        <div class="live-status">
+                            <span class="live-text">LIVE</span>
+                            <div class="cam-icon">
+                                <img src="../../assets/icons/cam.svg" alt="cam">
+                            </div>
+                        </div>
+                        <div class="deep-cam-arrow">
+                            <div class="deep-icon">
+                                <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 13.6591L8.36504 15L16 7.5L8.36504 0L7 1.34091L13.2699 7.5L7 13.6591Z" fill="white"/>
+                                    <path d="M0 13.6591L1.36504 15L9 7.5L1.36504 0L0 1.34091L6.26992 7.5L0 13.6591Z" fill="white"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </button>
+                </aside>
+            </div>
+            <div class="content_wrapper">
+                <section class="animal_container sect_animal">
+                    <div class="animal-header">
+                        <h1 id="animal-title">live panda cams</h1>
+                        <button class="header-donate-btn">DONATE NOW &rarr;</button>
+                    </div>
+                    <div class="vide_fram">
+                        <iframe id="video-stream" src="https://www.youtube.com/watch?v=lx0AU7nAyeM" frameborder="0" allowfullscreen></iframe>
+                        <button class="header-donate-btn" id="after-frame">DONATE NOW &rarr;</button>
+                    </div>
+                    <div class="grid-animals-view">
+                        <h2>More Live Views</h2>
+                        <div class="cards-view">
+                            <button class="nav-arrow left">&larr;</button>
+                            <div class="carousel-container" id="camera-grid">
+                                <div class="cam-card active">
+                                    <div class="label">CAM 1
+                                        <span class="live-icon">
+                                        </span>
+                                    </div>
+                                    <img src="../../assets/images/camlive1.png" alt="Panda Cam 1">
+                                    <div class="play-icon"></div>
+                                </div>
+                                <div class="cam-card">
+                                    <div class="label">CAM 2
+                                        <span class="live-icon">
+                                        </span>
+                                    </div>
+                                    <img src="../../assets/images/camlive2.png" alt="Panda Cam 2">
+                                    <div class="play-icon"></div>
+                                </div>
+                                <div class="cam-card">
+                                    <div class="label">CAM 3
+                                        <span class="live-icon">
+                                        </span>
+                                    </div>
+                                    <img src="../../assets/images/camlive3.png" alt="Panda Cam 3">
+                                    <div class="play-icon"></div>
+                                </div>
+                            </div>
+                            <button class="nav-arrow right">&rarr;</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <section class="donation_section">
+            <div class="info-section">
+                <div class="donation-banner donation-text">
+                    <h3 class="donation-banner-title don-title">make the Bamboo Donation!</h3>
+                    <p class="don-text">Our process for bamboo donations first starts with a site evaluation. It is important that our team sees where the bamboo is growing, then determining if the bamboo is a species that our animals are currently eating. Thank you for your interest in donating bamboo for our pandas.</p>
+                </div>
+                <div class="donation-form donate-p">
+                    <label for="Quicki">Quick Donate</label>
+                    <div class="donation_input_group">
+                        <input type="text" placeholder="$ DONATION AMOUNT">
+                        <button type="submit" class="donate-now">→</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="animal_container content_view">
+            <div class="content">
+                <article class="info-animal">
+                    <h3>did you know?</h3>
+                    <p>Pandas are often seen eating in a relaxed sitting posture, with their hind legs stretched out before them. They may appear sedentary, but they are skilled tree-climbers and efficient swimmers.</p>
+                </article>
+                <section class="animal-details">
+                    <div class="inner-animal-details">
+                        <div class="stats">
+                            <p><strong>Common name:</strong>Giant Panda</p>
+                            <p><strong>Type:</strong>Herbivore</p>
+                            <p></p>
+                        </div>
+                        <img src="../../assets/images/contentimg.png" alt="Animal Details" id="animal-details-img">
+                    </div>
+                    <div class="infoP">
+                        <p>Giant pandas are very unusual animals that eat almost exclusively bamboo, which is very low in nutrients. Because of this, they have many unique adaptations for their low-energy lifestyle. Giant pandas are solitary. They have a highly developed sense of smell that males use to avoid each other and to find females for mating in the spring. After a five-month pregnancy, females give birth to a cub or two, though they cannot care for both twins. The blind infants weigh only 5 ounces at birth and cannot crawl until they reach three months of age. They are born white, and develop their much loved coloring later. Habitat loss is the primary threat to this species. Its popularity around the world has helped the giant panda become the focus of successful conservation programs.</p>
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer-wrapper">
+            <div class="footer_container">
+                <div class="footer_top">
+                    <div class="footer_logos">
+                        <a href="#" class="footer_logo-link">
+                            <img src="../../assets/images/logo.svg" alt="Watch Online Zoo Live">
+                        </a>
+                        <a href="#" class="yem-logo">
+                            <img src="../../assets/icons/yemlogo.svg" alt="Yem Logo">
+                        </a>
+                        <a href="https://app.rs.school/" class="school-logo">
+                            <img src="../../assets/images/rs_school_js_logo.svg" alt="RS School Logo">
+                        </a>
+                    </div>
+                    <nav class="footer-nav">
+                        <ul class="footer-list">
+                            <li class="footer-item">
+                                <a href="" class="footer-link">About</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="" class="footer-link">Map</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="" class="footer-link">Zoos</a>
+                            </li>
+                            <li class="footer-item">
+                                <a href="" class="footer-link">Contact</a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <button class="footer_donate">
+                        <a href="../modals/popup.html" class="donate_btn">DONATE FOR VOLUNTEERS &rarr;</a>
+                    </button>
+                </div>
+                <hr class="footer_divider">
+                <div class="footer-bottom">
+                    <div class="footer_copyright">
+                        <span>© 2021 Dinak</span>
+                        <span>© Yem Digital</span>
+                        <span>© RSSchool</span>
+                    </div>
+                    <div class="footer-social social-links">
+                        <a href="#" class="social-icon youtube">
+                            <i class="fa-brands fa-youtube"></i>
+                        </a>
+                        <a href="#" class="social-icon instagram">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-icon facebook">
+                            <i class="fa-brands fa-facebook-f"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- <script src="../landing/landing.ts"></script> -->
+    <script type="module" src="./animal.ts"></script>
+    <!-- <script src="/pages/map/map.js"></script> -->
+</body>
+</html>
